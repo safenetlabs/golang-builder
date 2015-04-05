@@ -1,8 +1,6 @@
 #!/bin/bash
 
-source /build_environment.sh
-
-tagName = $1
+tagName=$1
 
 # Compile statically linked version of package
 echo "Building $pkgName"

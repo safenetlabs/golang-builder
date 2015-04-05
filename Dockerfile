@@ -5,12 +5,15 @@ MAINTAINER SafeNet Labs
 RUN wget -nv https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker && \
   chmod +x /usr/bin/docker
 
-VOLUME /src
+#VOLUME /src
+#VOLUME /out
 WORKDIR /src
 
 COPY build_environment.sh /
 COPY build.sh /
 
 ENTRYPOINT ["/build_environment.sh"]
+
+ONBUILD COPY ./ /src
 
 CMD ["/build.sh"]

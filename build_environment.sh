@@ -15,6 +15,8 @@ then
   exit 992
 fi
 
+export pkgName
+
 # Grab just first path listed in GOPATH
 goPath="${GOPATH%%:*}"
 
