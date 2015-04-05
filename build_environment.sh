@@ -1,7 +1,5 @@
 #!/bin/bash
 
-tagName=$1
-
 if ( find /src -maxdepth 0 -empty | read v );
 then
   echo "Error: Must mount Go source code into /src directory"
@@ -37,3 +35,5 @@ else
   # Get all package dependencies
   go get -t -d -v ./...
 fi
+
+exec "$@"

@@ -2,6 +2,8 @@
 
 source /build_environment.sh
 
+tagName = $1
+
 # Compile statically linked version of package
 echo "Building $pkgName"
 `CGO_ENABLED=${CGO_ENABLED:-0} go build -a --installsuffix cgo --ldflags="${LDFLAGS:--s}" $pkgName`
