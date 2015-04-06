@@ -6,7 +6,7 @@ RUN wget -nv https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bi
   chmod +x /usr/bin/docker
 
 #VOLUME /src
-#VOLUME /out
+VOLUME /out
 WORKDIR /src
 
 COPY build_environment.sh /
