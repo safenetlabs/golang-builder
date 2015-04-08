@@ -14,6 +14,4 @@ COPY build.sh /
 
 ENTRYPOINT ["/build_environment.sh"]
 
-ONBUILD COPY ./ /src
-
 CMD ["/build.sh"]

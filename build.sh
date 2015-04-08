@@ -3,13 +3,13 @@
 tagName=$1
 
 # Compile statically linked version of package
-echo "Building $pkgName"
-`CGO_ENABLED=${CGO_ENABLED:-0} go build -a --installsuffix cgo --ldflags="${LDFLAGS:--s}" $pkgName`
+echo "Building $PKG_NAME"
+`CGO_ENABLED=${CGO_ENABLED:-0} go build -a --installsuffix cgo --ldflags="${LDFLAGS:--s}" $PKG_NAME`
 
 if [ -e "/var/run/docker.sock" ] && [ -e "./Dockerfile" ];
 then
   # Grab the last segment from the package name
-  name=${pkgName##*/}
+  name=${PKG_NAME##*/}
 
   # Default TAG_NAME to package name if not set explicitly
   tagName=${tagName:-"$name":latest}
