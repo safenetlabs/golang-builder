@@ -1,17 +1,8 @@
 FROM golang:1.4.2
 MAINTAINER SafeNet Labs
 
-# Install Docker binary
-RUN wget -nv https://get.docker.com/builds/Linux/x86_64/docker-latest -O /usr/bin/docker && \
-  chmod +x /usr/bin/docker
-
-#VOLUME /src
-VOLUME /out
+RUN rm /usr/local/bin/go-wrapper
+COPY go-wrapper /usr/local/bin/
+RUN mkdir /src
 WORKDIR /src
-
-COPY build_environment.sh /
-COPY build.sh /
-
-ENTRYPOINT ["/build_environment.sh"]
-
-CMD ["/build.sh"]
+ENTRYPOINT ["go-wrapper"]

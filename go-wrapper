@@ -1,0 +1,38 @@
+#!/bin/bash
+set -e
+
+goDir="$(go list -e -f '{{.ImportComment}}' 2>/dev/null || true)"
+
+if [ -z "$goDir" -a -s .godir ]; then
+	goDir="$(cat .godir)"
+fi
+
+if [ -z "$goDir" ];
+then
+  echo "Error: Must add canonical import path to root package, or create a .godir file"
+  exit 992
+fi
+
+
+
+dir="$(pwd -P)"
+
+goPath="${GOPATH%%:*}" # this just grabs the first path listed in GOPATH, if there are multiple (which is the detection logic "go get" itself uses, too)
+goDirPath="$goPath/src/$goDir"
+mkdir -p "$(dirname "$goDirPath")"
+if [ ! -e "$goDirPath" ]; then
+	ln -sfv "$dir" "$goDirPath"
+elif [ ! -L "$goDirPath" ]; then
+	echo >&2 "error: $goDirPath already exists but is unexpectedly not a symlink!"
+	exit 1
+fi
+
+if [ -e "$dir/Godeps/_workspace" ];
+then
+  # Add local godeps dir to GOPATH
+  GOPATH=$dir/Godeps/_workspace:$GOPATH
+fi
+
+cd $goDirPath
+
+set -x; exec "$@"
