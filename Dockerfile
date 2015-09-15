@@ -1,4 +1,4 @@
-FROM golang:1.4.2
+FROM golang:1.5.1
 MAINTAINER SafeNet Labs
 
 RUN rm /usr/local/bin/go-wrapper
