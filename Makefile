@@ -1,6 +1,6 @@
 SHELL=bash
 
-TAG ?= 1.5.2
+TAG ?= 1.5.3
 
 build:
 	docker build -t safenetlabs/golang:$(TAG) .

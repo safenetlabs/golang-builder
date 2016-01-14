@@ -1,4 +1,4 @@
-FROM safenetlabs/golang:1.5.1
+FROM safenetlabs/golang:1.5.3
 MAINTAINER SafeNet Labs
 # This builds an image which will by default create a new docker
 # container containing just the go executable
